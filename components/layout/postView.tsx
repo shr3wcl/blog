@@ -126,6 +126,10 @@ export const PostView = ({post}: { post: Post }) => {
 
               }
 
+              img{
+                margin: 8px 0 4px;
+              }
+
               .notion-asset-wrapper, .notion-asset-wrapper-video {
                 display: flex;
                 flex-direction: column;
@@ -136,7 +140,7 @@ export const PostView = ({post}: { post: Post }) => {
 
               .notion-header {
                 position: sticky;
-                top: 1rem;
+                top: 0rem;
                 left: 0;
                 z-index: 200;
                 width: 100%;
@@ -144,8 +148,9 @@ export const PostView = ({post}: { post: Post }) => {
                 overflow: hidden;
                 height: var(--notion-header-height);
                 min-height: var(--notion-header-height);
-                background: var(--bg-color);
+                //background: #171717;
                 font-size: 14px;
+                padding-top: 10px;
                 color: rgb(107 114 128 / var(--tw-text-opacity));
               }
 
@@ -160,6 +165,7 @@ export const PostView = ({post}: { post: Post }) => {
 
               .notion {
                 font-size: 18px;
+                line-height: 28px;
                 font-family: ui-sans-serif, system-ui, -apple-system,
                 BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
                 "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -266,6 +272,12 @@ export const PostView = ({post}: { post: Post }) => {
                 --notion-orange_background_co: rgba(89, 74, 58, 0.3);
                 --notion-brown_background_co: rgba(67, 64, 64, 0.3);
                 --notion-gray_background_co: rgba(69, 75, 78, 0.3);
+              }
+
+              @media screen and (max-width: 1024px) {
+                .notion-page{
+                  min-width: 100%;
+                }
               }
             `}</style>
         </div>
