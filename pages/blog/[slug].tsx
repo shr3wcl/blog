@@ -11,7 +11,7 @@ export default function PostDetail({ post }: {post: Post}) {
     }
 
     return (
-        <div className="px-4 mx-auto font-sans sm:px-6 lg:px-8 w-full dark:bg-[#171717]">
+        <div className="px-4 mx-auto font-sans sm:px-6 lg:px-8 w-full dark:bg-[#171717] min-h-screen">
             <PostView post={post} />
         </div>
     )
