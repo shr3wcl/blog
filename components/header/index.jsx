@@ -49,7 +49,7 @@ const Header = () => {
     const router = useRouter();
     return (
         <Disclosure as="nav"
-                    className="fixed top-0 right-0 left-0 z-10 bg-white border-b border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-600">
+                    className="z-10 bg-white border-b border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-600">
             {({open}) => (
                 <nav>
                     <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
