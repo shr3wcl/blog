@@ -40,7 +40,7 @@ function DarkModeButton(isDarkMode, setDarkMode) {
 }
 
 
-function classNames(...classes: string[]) {
+function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
