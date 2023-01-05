@@ -56,17 +56,17 @@ export const PostView = ({post}: { post: Post }) => {
               h1, h2, h3, h4, h5, h6 {
                 padding: 20px 0 !important;
               }
-              
-              h1{
+
+              h1 {
                 font-size: 2em;
                 margin-top: 1.1em;
               }
-              
-              h2{
+
+              h2 {
                 font-size: 1.75em;
                 margin-top: 1.1em;
               }
-              
+
               h3 {
                 font-size: 1.5em;
                 margin-top: 1.1em;
@@ -80,19 +80,19 @@ export const PostView = ({post}: { post: Post }) => {
                 white-space: pre-wrap;
                 word-break: break-word;
               }
-              
-              h4{
+
+              h4 {
                 font-size: 1.25em;
                 margin-top: 1.1em;
               }
-              
-              h5{
-              font-size: 1em;
+
+              h5 {
+                font-size: 1em;
                 margin-top: 1.1em;
               }
-              
-              h6{
-              font-size: 0.75em;
+
+              h6 {
+                font-size: 0.75em;
                 margin-top: 1.1em;
               }
 
@@ -104,7 +104,7 @@ export const PostView = ({post}: { post: Post }) => {
                 width: var(--notion-max-width);
                 padding-left: calc(min(16px, 8vw));
                 padding-right: calc(min(16px, 8vw));
-                max-width: 60%;
+                width: 60%;
               }
 
               .note-page-content * {
