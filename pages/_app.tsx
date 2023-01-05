@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </Head>
         <Header/>
           <QueryClientProvider client={queryClient}>
-              <div className={"mt-12"}>
+              <div className={"dark:bg-[#171717]"}>
                   <Component {...pageProps}/>
               </div>
           </QueryClientProvider>

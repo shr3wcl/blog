@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -36,7 +36,7 @@ export const getStaticProps = async () => {
         props = JSON.parse(JSON.stringify(props));
 
         // const props = {posts: [], hashtag_list: []};
-        return { props, revalidate: 60 * 60 * 1 }
+        return { props, revalidate: 60 * 60 }
     } catch (err) {
         console.error('page error', err)
 
@@ -56,10 +56,11 @@ export default function NotionDomainPage({posts, hashtag_list}: {posts: Post[], 
         q_hashtags = hashtags.split(',');
     }
 
-    let show_posts = posts
+    let [show_posts, setShow_posts] = useState(posts);
     if(q_hashtags.length){
         for(const hashtag of q_hashtags){
-            show_posts = show_posts.filter(post => post.hashtags.includes(hashtag));
+            const temp = show_posts.filter(post => post.hashtags.includes(hashtag));
+            setShow_posts(temp);
         }
     }
 
@@ -94,12 +95,12 @@ export default function NotionDomainPage({posts, hashtag_list}: {posts: Post[], 
 
     return (
         <div className={"dark:bg-[#171717] dark:text-gray-50 min-h-screen w-full"}>
-            <div className="container main max-w-5xl px-4 mx-auto mt-10 sm:px-6 lg:px-8">
-                <div className="mt-1 accordion card mb-3" id="selectHashtags">
+            <div className="max-w-5xl px-4 mx-auto mt-10 sm:px-6 lg:px-0">
+                <div className="accordion card" id="selectHashtags">
                     <div id="selections" className="accordion-collapse collapse show" aria-labelledby="selections" data-bs-parent="#selections">
                         <div className="accordion-body">
                             {hashtag_list.map((hashtag) => (
-                                <div className="form-check mb-2" key={`hashtag-${hashtag.name}-field`}>
+                                <div className="form-check" key={`hashtag-${hashtag.name}-field`}>
                                     <input className="form-check-input" type="checkbox" id={`hashtag-${hashtag.name}`} name={hashtag.name} onChange={hashtagChange} />
                                     <label className={`form-check-label notion-${hashtag.color}_background`} htmlFor={`hashtag-${hashtag.name}`} >
                                         #{hashtag.name}: {hashtag.count}
@@ -110,12 +111,14 @@ export default function NotionDomainPage({posts, hashtag_list}: {posts: Post[], 
                     </div>
                 </div>
 
-                <h5>✨ Newest</h5>
-                {show_posts.map((post:Post) => (
-                    <div className="card mt-5 dark:bg-[#111827] border-2 border-amber-50 w-[48%] rounded-2xl" key={post.id}>
-                        <PostContent post={post} />
-                    </div>
-                ))}
+                <h5 className={"mb-3"}>✨ Newest</h5>
+                <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
+                    {show_posts.map((post:Post) => (
+                        <div className="card dark:bg-[#111827] border-[1px] hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full" key={post.id}>
+                            <PostContent post={post} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
