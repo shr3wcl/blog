@@ -114,7 +114,7 @@ export default function NotionDomainPage({posts, hashtag_list}: {posts: Post[], 
                 <h5 className={"mb-3"}>✨ Newest</h5>
                 <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
                     {show_posts.map((post:Post) => (
-                        <div className="card dark:bg-[#111827] border-[1px] hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full" key={post.id}>
+                        <div className="card dark:bg-[#111827] border-[1px] hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48 lg:h-36" key={post.id}>
                             <PostContent post={post} />
                         </div>
                     ))}

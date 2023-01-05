@@ -18,7 +18,7 @@ export const PostContent = ({post}:{post:Post}) => {
                 </div>
                 <h6 className="card-subtitle mb-2 text-muted text-sm" id={`${post.id}_published_at`}>{new Date(post.date ?? '').toLocaleString()}</h6>
                 {/*<h6 className="card-subtitle mb-2 text-muted" id={`${post.id}_edited_at`}>edited_at: &ensp;{new Date(post.edited).toLocaleString()}</h6>*/}
-                <div className="d-flex flex flex-row">
+                <div className="d-flex flex flex-row my-2 mb-4">
                     {post.hashtags?.map((hashtag) => {
                         return (
                             <div key={`${post.id}_${hashtag}`} className="me-3 mx-1 flex justify-center items-center">
