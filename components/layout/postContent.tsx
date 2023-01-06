@@ -24,7 +24,7 @@ export const PostContent = ({post}:{post:Post}) => {
                             <div key={`${post.id}_${hashtag}`} className="me-3 mx-1 flex justify-center items-center">
                                 {/*<Link href={`/?hashtags=${hashtag}`}>*/}
                                 <div>
-                                    <span className="h6 mb-0 notion-link dark:bg-green-300 text-gray-900 px-1 rounded">#{hashtag}</span>
+                                    <span className="h6 mb-0 notion-link bg-yellow-500 dark:bg-green-300 text-gray-900 px-1 rounded">#{hashtag}</span>
                                     {/*</Link>*/}
 
                                 </div>

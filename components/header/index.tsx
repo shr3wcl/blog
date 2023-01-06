@@ -19,7 +19,7 @@ const navigation = [
     {name: 'About me', href: '/me', logo: <IoPersonOutline/>, current: false}
 ]
 
-function DarkModeButton(isDarkMode, setDarkMode) {
+function DarkModeButton(isDarkMode: any, setDarkMode: any) {
     return (
         <div className="grid place-items-center text-gray-500">
             <Switch
@@ -40,7 +40,7 @@ function DarkModeButton(isDarkMode, setDarkMode) {
 }
 
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
