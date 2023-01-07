@@ -3,6 +3,7 @@ import { AppProps } from 'next/app'
 import Head from "next/head";
 import Header from '../components/header';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Footer from "../components/footer";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   <Component {...pageProps}/>
               </div>
           </QueryClientProvider>
+          <Footer/>
       </div>
   )
 }
