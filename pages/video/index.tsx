@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import {MdUpdate} from "react-icons/md";
+import {BiTime} from "react-icons/bi";
 
 export const getStaticProps = async () => {
     const res = await fetch("https://www.googleapis.com/youtube/v3/search?key=AIzaSyCt16F_lL14GTFLm-a8pFwEN_s5UtfLCJ8&channelId=UCpqUZTgGgqc2C7ae57tOF4Q&part=snippet,id&order=date&maxResults=20");
@@ -17,7 +19,7 @@ const Video = ({videoList}: any) => {
         <div className={"dark:bg-[#171717] dark:text-gray-50 min-h-screen w-full"}>
             <div className="max-w-5xl px-4 mx-auto mt-10 sm:px-6 lg:px-0">
 
-                <header>Video</header>
+                <header className={"mb-6"}>🎥 Video</header>
                 <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
                     {videoList.map((each: any) => {
                         return (
@@ -28,9 +30,9 @@ const Video = ({videoList}: any) => {
                                         <img src={each.snippet.thumbnails.medium.url} alt="Thumbnails" className={"w-52 p-1 rounded-xl"}/>
                                     </div>
                                     <div className={"flex-col my-3"}>
-                                        <p className={"mb-2 dark:text-blue-400"}>{each.snippet.title}</p>
+                                        <p className={"mb-2 dark:text-blue-400 font-semibold"}>{each.snippet.title}</p>
                                         <p className={"text-sm text-gray-500 mb-1"}>{each.snippet.description}</p>
-                                        <p className={"text-sm text-gray-500"}>{each.snippet.publishedAt}</p>
+                                        <p className={"text-sm text-gray-500 flex"}><BiTime className={"relative top-1 mr-1"}/>{each.snippet.publishedAt}</p>
                                     </div>
                                 </Link>
                             </div>
