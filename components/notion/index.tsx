@@ -1,20 +1,20 @@
 import { Client } from '@notionhq/client'
 import { NotionAPI } from 'notion-client'
+import { Post, Hashtag } from './postType'
 
 const notion = new Client({
-    auth: "secret_vCGng3kmDBZxRijXg9RAiCTu20kwbmbK1utA9d2HTVj",
+    auth: process.env.NOTION_KEY,
 })
 
 const notionApi = new NotionAPI({
     authToken: process.env.TOKEN_V2,
 });
 
-import { Post, Hashtag } from './postType'
-
 export const getPosts = async ( databaseId: string) => {
     const response = await notion.databases.query({
         database_id: databaseId,
     })
+
     const { results } = response
 
     let posts = results.map((result:any) => {
@@ -75,10 +75,9 @@ export const getPosts = async ( databaseId: string) => {
             }
         })
 
-        // Add date if it is empty.
-        const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        const timeZoneOffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
         if(!d.Date.date) {
-            let localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+            let localISOTime = (new Date(Date.now() - timeZoneOffset)).toISOString().slice(0, -1);
             localISOTime += '-08:00';
 
             let properties = {
@@ -93,7 +92,6 @@ export const getPosts = async ( databaseId: string) => {
             item.date = localISOTime;
         }
 
-        // Add 4:00PM to date only.
         if(item.date.length < 10){
             item.date = item.date + 'T16:00:00.000-08:00'
         }
@@ -103,13 +101,12 @@ export const getPosts = async ( databaseId: string) => {
     })
 
     posts = posts.filter((post): post is Post => typeof post !== 'undefined');
-    // Sort database by date.
+
     posts.sort((a, b) => b!.date - a!.date);
 
     return posts
 }
 
-// Get page detail
 export const getPage = async (pageId: string) => {
     const page = await notionApi.getPage(pageId);
     return page
@@ -124,11 +121,11 @@ export const updateProperties = async (pageId: string, properties: any) => {
 
 export const getHashtags = async () => {
     const response = await notion.databases.query({
-        database_id: "dfb969cf85fb4698886dba7ad2dca860" ?? '',
+        database_id: process.env.NOTION_BLOG_ID ?? '',
     })
-    const { results } = response as any
+    const { results } = response as any;
 
-    let hashtags:Hashtag[] = []
+    let hashtags:Hashtag[] = [];
     for(const result of results){
         const d = result.properties! as any
         for(const select of d.Hashtags.multi_select) {
