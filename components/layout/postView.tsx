@@ -39,7 +39,7 @@ export const PostView = ({post}: { post: Post }) => {
                     // Tweet: TweetRender,
                     Modal,
                 }} recordMap={post.recordMap} fullPage={true} darkMode={false} showTableOfContents
-                                minTableOfContentsItems={3} className={""}/>
+                                minTableOfContentsItems={3} className={"dark:bg-[#171717]"}/>
             </article>
             <style global jsx>{`
 
@@ -143,10 +143,10 @@ export const PostView = ({post}: { post: Post }) => {
               }
 
               .notion-header {
-                position: sticky;
+                //position: sticky;
                 top: 0rem;
                 left: 0;
-                z-index: 200;
+                z-index: 20;
                 width: 100%;
                 max-width: 100vw;
                 overflow: hidden;
