@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.notion-gray_background{
+    background-color: #E3E2E0;
+}
+
+.notion-brown_background{
+    background-color: #EEE0DA;
+}
+.notion-orange_background{
+    background-color: #FADEC9;
+}
+.notion-yellow_background{
+    background-color: #FDECC8;
+}
+.notion-green_background{
+    background-color: #DBEDDB;
+}
+
+.notion-blue_background{
+    background-color: #D3E5EF;
+}
+.notion-purple_background{
+    background-color: #E8DEEE;
+}
+.notion-pink_background{
+    background-color: #F5E0E9;
+}
+.notion-red_background{
+    background-color: #FFE2DD;
+}
+.notion-default_background{
+    background-color: #E9E8E6;
+}
