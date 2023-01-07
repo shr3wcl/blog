@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-
+import dayjs from "dayjs";
 
 const Code = dynamic(async () => {
     const m = await import("react-notion-x/build/third-party/code");
@@ -29,7 +29,11 @@ export const PostView = ({post}: { post: Post }) => {
             <Head>
                 <title>{post.title}</title>
             </Head>
-            <article>
+            <header className={"sticky top-0 mt-2 py-2 px-4 w-full bg-white dark:bg-[#171717] z-20 flex justify-between"}>
+                <span className={"truncate text-inherit"}>{post.title}</span>
+                <span className={"hidden md:flex"}>🕗 <span className={"ml-2"}>{dayjs(post.date, "MM-DD-YYYY").format("hh:mm | MMM DD, YYYY")}</span></span>
+            </header>
+            <article className={"px-4 sm:px-6 lg:px-8"}>
                 <NotionRenderer components={{
                     Code,
                     // collection: Collection,
@@ -144,18 +148,19 @@ export const PostView = ({post}: { post: Post }) => {
 
               .notion-header {
                 //position: sticky;
-                top: 0rem;
-                left: 0;
-                z-index: 20;
-                width: 100%;
-                max-width: 100vw;
-                overflow: hidden;
-                height: var(--notion-header-height);
-                min-height: var(--notion-header-height);
-                //background: #171717;
-                font-size: 14px;
-                padding-top: 10px;
-                color: rgb(107 114 128 / var(--tw-text-opacity));
+                //top: 0rem;
+                //left: 0;
+                //z-index: 20;
+                //width: 100%;
+                //max-width: 100vw;
+                //overflow: hidden;
+                //height: var(--notion-header-height);
+                //min-height: var(--notion-header-height);
+                ////background: #171717;
+                //font-size: 14px;
+                //padding-top: 10px;
+                //color: rgb(107 114 128 / var(--tw-text-opacity));
+                display: none;
               }
 
               h1.notion-title {
