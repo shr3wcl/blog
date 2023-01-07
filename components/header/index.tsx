@@ -13,9 +13,9 @@ import {IoPersonOutline} from "react-icons/io5";
 
 const navigation = [
     {name: 'Blog', href: '/', logo: <CiStickyNote/>, current: false},
-    {name: 'Video', href: '/video', logo: <CiVideoOn/>, current: false},
     {name: 'Projects', href: '/projects', logo: <GoLightBulb/>, current: false},
     {name: 'Article Saved', href: '/article', logo: <MdOutlineArticle/>, current: false},
+    {name: 'Video', href: '/video', logo: <CiVideoOn/>, current: false},
     {name: 'About me', href: '/me', logo: <IoPersonOutline/>, current: false}
 ]
 
@@ -32,7 +32,7 @@ function DarkModeButton(isDarkMode: any, setDarkMode: any) {
                     aria-hidden="true"
                     className={`${isDarkMode ? 'translate-x-5' : 'translate-x-0'}
                                                 pointer-events-none flex justify-center items-center inline-block h-[22px] w-[22px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}>
-                    {isDarkMode ? <BiMoon/> : <BiSun/>}
+                    {isDarkMode ? <BiMoon className={"text-blue-400"}/> : <BiSun className={"text-red-500"}/>}
                 </span>
             </Switch>
         </div>
