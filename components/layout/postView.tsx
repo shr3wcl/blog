@@ -3,6 +3,7 @@ import {NotionRenderer} from "react-notion-x";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head";
 
 
 const Code = dynamic(async () => {
@@ -25,6 +26,9 @@ export const PostView = ({post}: { post: Post }) => {
 
     return (
         <div className={"w-full dark:bg-[#171717] dark:text-gray-50 "}>
+            <Head>
+                <title>{post.title}</title>
+            </Head>
             <article>
                 <NotionRenderer components={{
                     Code,
