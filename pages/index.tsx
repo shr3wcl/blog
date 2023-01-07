@@ -1,25 +1,22 @@
 import React, {useState} from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-import styles from '../styles/Home.module.css'
-
-import { NotionRenderer } from 'react-notion-x'
-
 import {getPosts, getPage, getHashtags} from '../components/notion'
 import { Post, Hashtag } from '../components/notion/postType'
-
 import {PostContent} from '../components/layout/postContent'
+
+const NOTION_BLOG_ID = process.env.NOTION_BLOG_ID;
 
 function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
 
+function classNames(...classes: any[]) {
+    return classes.filter(Boolean).join(" ");
+}
+
 export const getStaticProps = async () => {
     try {
-        let posts = await getPosts('dfb969cf85fb4698886dba7ad2dca860' ?? '');
+        let posts = await getPosts(NOTION_BLOG_ID ?? '');
 
         // Restrict posts to only those with a featured image.
         // posts = posts.slice(0, 5);
@@ -29,26 +26,20 @@ export const getStaticProps = async () => {
             post!.recordMap = await getPage(post!.id);
         }
 
-        // Hashtag selections
         let hashtag_list = await getHashtags();
-
         let props = {posts: posts, hashtag_list: hashtag_list};
         props = JSON.parse(JSON.stringify(props));
 
-        // const props = {posts: [], hashtag_list: []};
         return { props, revalidate: 60 * 60 }
     } catch (err) {
         console.error('page error', err)
-
-        // we don't want to publish the error version of this page, so
-        // let next.js know explicitly that incremental SSG failed
         throw err
     }
 }
 
 export default function NotionDomainPage({posts, hashtag_list}: {posts: Post[], hashtag_list: Hashtag[]}) {
     const router = useRouter();
-    // query hashtags
+
     let { hashtags } = router.query;
 
     let q_hashtags:string[] = [];
@@ -96,18 +87,16 @@ export default function NotionDomainPage({posts, hashtag_list}: {posts: Post[], 
     return (
         <div className={"dark:bg-[#171717] dark:text-gray-50 min-h-screen w-full"}>
             <div className="max-w-5xl px-4 mx-auto mt-10 sm:px-6 lg:px-0">
-                <div className="accordion card" id="selectHashtags">
-                    <div id="selections" className="accordion-collapse collapse show" aria-labelledby="selections" data-bs-parent="#selections">
-                        <div className="accordion-body">
-                            {hashtag_list.map((hashtag) => (
-                                <div className="form-check" key={`hashtag-${hashtag.name}-field`}>
-                                    <input className="form-check-input" type="checkbox" id={`hashtag-${hashtag.name}`} name={hashtag.name} onChange={hashtagChange} />
-                                    <label className={`form-check-label notion-${hashtag.color}_background`} htmlFor={`hashtag-${hashtag.name}`} >
-                                        #{hashtag.name}: {hashtag.count}
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
+                <div className="accordion-body mb-5 ">
+                    <h3 className={"font-semibold my-2"}># Hashtag</h3>
+                    <div className={"flex flex-wrap"}>
+                        {hashtag_list.map((hashtag) => (
+                            <div className={"mr-2 mt-3"} key={`hashtag-${hashtag.name}-field`}>
+                                <label className={`form-check-label cursor-pointer rounded px-1 py-1 text-gray-700 notion-${hashtag.color}_background`} htmlFor={`hashtag-${hashtag.name}`} >
+                                    {hashtag.name}: {hashtag.count}
+                                </label>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
