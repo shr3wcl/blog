@@ -13,7 +13,7 @@ export const PostContent = ({post}: { post: Post }) => {
                 <div className="card-title d-flex align-items-center">
                     <div className="profile align-items-center">
                         <div>
-                            <p className="mb-0 notion-link text-blue-400 mt-2 text-2xl mb-2 font-semibold"
+                            <p className="mb-0 notion-link text-blue-500 mt-2 text-2xl mb-2 font-semibold"
                                id={`${post.id}_title`}>{post.title}</p>
                             <p className={"mt-1 text-gray-400 flex"}><MdOutlineDescription
                                 className={"relative top-1 mr-1"}/>{post.description || post.title}</p>
@@ -31,7 +31,7 @@ export const PostContent = ({post}: { post: Post }) => {
                                 {/*<Link href={`/?hashtags=${hashtag}`}>*/}
                                 <div>
                                     <span
-                                        className="h6 mb-0 notion-link bg-yellow-500 dark:bg-green-300 text-gray-900 px-1 rounded">#{hashtag}</span>
+                                        className="h6 mb-0 notion-link bg-green-400 dark:bg-green-400 text-gray-900 px-1 rounded">#{hashtag}</span>
                                     {/*</Link>*/}
                                 </div>
                             </div>
