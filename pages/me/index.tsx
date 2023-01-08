@@ -1,6 +1,11 @@
+import Head from "next/head";
+
 const Myself = () => {
     return (
         <div>
+            <Head>
+                <title>Me</title>
+            </Head>
             <div className={"flex justify-center flex-col items-center mt-6 px-4"}>
                 <figure className="max-w-screen-md mx-auto text-center">
                     {/*<svg aria-hidden="true" className="w-12 h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600"*/}
