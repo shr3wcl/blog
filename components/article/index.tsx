@@ -2,7 +2,7 @@ import Link from "next/link";
 import {MdUpdate} from "react-icons/md";
 import dayjs from "dayjs";
 
-const Article = ({articleList}: any) => {
+const ArticleList = ({articleList}: any) => {
     return(
         <article className={"mt-4 px-8 grid justify-around grid-cols-1 gap-4 px-2 align-top gap-x-8 md:grid-cols-2 lg:grid-cols-3"}>
             {articleList.map((article: any) => {
@@ -38,4 +38,4 @@ const Article = ({articleList}: any) => {
     )
 }
 
-export default Article;
+export default ArticleList;

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import ArticleList from "../../components/article";
 
 export const getStaticProps = async () => {
     const res = await fetch("https://api.raindrop.io/rest/v1/raindrops/30340862",
@@ -21,7 +22,7 @@ const Article = ({articleList}: any) => {
             <Head>
                 <title>Article Saved</title>
             </Head>
-            <Article articleList={articleList}/>
+            <ArticleList articleList={articleList}/>
         </div>
     )
 }
