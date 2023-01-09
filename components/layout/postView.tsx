@@ -29,9 +29,11 @@ export const PostView = ({post}: { post: Post }) => {
             <Head>
                 <title>{post.title}</title>
             </Head>
-            <header className={"sticky top-0 mt-2 py-2 px-4 w-full bg-white dark:bg-[#171717] z-20 flex justify-between"}>
+            <header
+                className={"sticky top-0 mt-2 py-2 px-4 w-full bg-white dark:bg-[#171717] z-20 flex justify-between"}>
                 <span className={"truncate text-inherit"}>{post.title}</span>
-                <span className={"hidden md:flex"}>🕗 <span className={"ml-2"}>{dayjs(post.date, "MM-DD-YYYY").format("hh:mm | MMM DD, YYYY")}</span></span>
+                <span className={"hidden md:flex"}>🕗 <span
+                    className={"ml-2"}>{dayjs(post.date, "MM-DD-YYYY").format("hh:mm | MMM DD, YYYY")}</span></span>
             </header>
             <article className={"px-4 sm:px-6 lg:px-8"}>
                 <NotionRenderer components={{
@@ -46,6 +48,9 @@ export const PostView = ({post}: { post: Post }) => {
                                 minTableOfContentsItems={3} className={"dark:bg-[#171717]"}/>
             </article>
             <style global jsx>{`
+              .notion-page-content {
+                display: flex;
+              }
 
               ul {
                 list-style-type: disc !important;
@@ -109,10 +114,9 @@ export const PostView = ({post}: { post: Post }) => {
               }
 
               .notion-page {
-                width: var(--notion-max-width);
-                padding-left: calc(min(16px, 8vw));
-                padding-right: calc(min(16px, 8vw));
-                width: 60%;
+                //width: var(--notion-max-width);
+                //padding-left: calc(min(16px, 8vw));
+                //padding-right: calc(min(16px, 8vw));
               }
 
               .note-page-content * {
@@ -121,8 +125,7 @@ export const PostView = ({post}: { post: Post }) => {
 
               .notion-page-scroller {
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                justify-content: right;
               }
 
               .notion-frame {
@@ -133,8 +136,10 @@ export const PostView = ({post}: { post: Post }) => {
                 margin-top: 20px;
 
               }
-
-              img{
+              .notion-page-content-inner>.notion-table-of-contents{
+                display: none;
+              }
+              img {
                 margin: 8px 0 4px;
               }
 
@@ -170,6 +175,9 @@ export const PostView = ({post}: { post: Post }) => {
                 line-height: 1.2;
                 font-weight: 600;
                 outline: 0;
+                font-weight: 600;
+                color: #3b82f6;
+                text-align: center;
               }
 
               .notion {
@@ -207,9 +215,15 @@ export const PostView = ({post}: { post: Post }) => {
               .notion-viewport {
                 position: relative;
               }
-
+              
+              .notion-aside{
+                padding-left: 2rem;
+                margin-top: 4rem;
+              }
+              
               .notion-aside-table-of-contents {
-                max-width: 250px;
+                position: sticky;
+                top: 30%;
               }
 
               .notion-table-of-contents-item {
@@ -238,6 +252,28 @@ export const PostView = ({post}: { post: Post }) => {
 
               .notion-to-do {
                 margin-left: 16px;
+              }
+              
+              .notion-aside-table-of-contents-header{
+              text-align: center;
+              }
+
+              @media (min-width: 1300px) and (min-height: 300px)
+
+              <
+              style >
+              .notion-page-content-has-aside {
+                display: flex;
+                flex-direction: row;
+                width: calc((100vw + var(--notion-max-width)) / 2);
+              }
+
+              <
+              style >
+              .notion-page-content {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
               }
 
               .dark .notion {
@@ -284,8 +320,11 @@ export const PostView = ({post}: { post: Post }) => {
               }
 
               @media screen and (max-width: 1024px) {
-                .notion-page{
+                .notion-page {
                   min-width: 100%;
+                }
+                .notion-aside{
+                display: none;
                 }
               }
             `}</style>
