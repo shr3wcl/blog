@@ -125,7 +125,7 @@ export const PostView = ({post}: { post: Post }) => {
 
               .notion-page-scroller {
                 display: flex;
-                justify-content: right;
+                justify-content: center;
               }
 
               .notion-frame {
@@ -136,9 +136,23 @@ export const PostView = ({post}: { post: Post }) => {
                 margin-top: 20px;
 
               }
-              .notion-page-content-inner>.notion-table-of-contents{
+
+              .notion-page-content-inner > .notion-table-of-contents {
                 display: none;
               }
+
+              .notion-page-content-inner{
+                max-width: 50rem;
+              }
+              .notion-page-content-inner a {
+                text-decoration: underline;
+                color: #686868;
+              }
+
+              .notion-page-content-inner a:hover {
+                color: #00a6ed;
+              }
+
               img {
                 margin: 8px 0 4px;
               }
@@ -152,19 +166,6 @@ export const PostView = ({post}: { post: Post }) => {
               }
 
               .notion-header {
-                //position: sticky;
-                //top: 0rem;
-                //left: 0;
-                //z-index: 20;
-                //width: 100%;
-                //max-width: 100vw;
-                //overflow: hidden;
-                //height: var(--notion-header-height);
-                //min-height: var(--notion-header-height);
-                ////background: #171717;
-                //font-size: 14px;
-                //padding-top: 10px;
-                //color: rgb(107 114 128 / var(--tw-text-opacity));
                 display: none;
               }
 
@@ -176,8 +177,9 @@ export const PostView = ({post}: { post: Post }) => {
                 font-weight: 600;
                 outline: 0;
                 font-weight: 600;
-                color: #3b82f6;
                 text-align: center;
+                color: #3b82f6 !important;
+
               }
 
               .notion {
@@ -215,15 +217,24 @@ export const PostView = ({post}: { post: Post }) => {
               .notion-viewport {
                 position: relative;
               }
-              
-              .notion-aside{
+
+              .notion-aside {
                 padding-left: 2rem;
                 margin-top: 4rem;
+                max-width: 20rem;
+                display: flex;
+                flex-direction: column;
               }
               
+              .notion-aside a {
+                display: inline-block;
+                width: 100%;
+                margin-bottom: 8px;
+              }
+
               .notion-aside-table-of-contents {
                 position: sticky;
-                top: 30%;
+                top: 24%;
               }
 
               .notion-table-of-contents-item {
@@ -253,9 +264,13 @@ export const PostView = ({post}: { post: Post }) => {
               .notion-to-do {
                 margin-left: 16px;
               }
-              
-              .notion-aside-table-of-contents-header{
-              text-align: center;
+
+              .notion-aside-table-of-contents-header {
+                text-align: center;
+                color: #3b82f6;
+                font-weight: 600;
+                font-size: 20px;
+                margin-bottom: 4px;
               }
 
               @media (min-width: 1300px) and (min-height: 300px)
@@ -323,8 +338,9 @@ export const PostView = ({post}: { post: Post }) => {
                 .notion-page {
                   min-width: 100%;
                 }
-                .notion-aside{
-                display: none;
+
+                .notion-aside {
+                  display: none;
                 }
               }
             `}</style>
