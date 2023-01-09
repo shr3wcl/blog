@@ -6,12 +6,13 @@ export const getStaticProps = async () => {
         {
             headers: {
                 Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`
-            }
+            },
         });
     const data = await res.json();
     return {
         props: {
-            articleList: data.items
+            articleList: data.items,
+            revalidate: 60 * 60
         }
     }
 }
