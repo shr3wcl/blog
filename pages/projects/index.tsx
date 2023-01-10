@@ -5,7 +5,7 @@ export const getStaticProps = async () => {
     const res = await fetch("https://api.github.com/users/Bin-08-01/repos");
     const data = await res.json();
     return {
-        props: {projects: data}
+        props: {projects: data, revalidate: 60 * 60}
     }
 }
 
