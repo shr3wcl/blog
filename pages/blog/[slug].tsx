@@ -15,7 +15,7 @@ export default function PostDetail({post}: { post: Post }) {
 }
 
 export const getStaticPaths = async () => {
-    const posts = await getPosts('dfb969cf85fb4698886dba7ad2dca860' as string)
+    const posts = await getPosts(process.env.NOTION_BLOG_ID as string)
     return {
         paths: posts.map((post) => ({params: {slug: post!.slug, id: post!.id}})),
         fallback: true,
@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: any) => {
     const {slug} = context.params;
-    const posts = await getPosts('dfb969cf85fb4698886dba7ad2dca860' as string);
+    const posts = await getPosts(process.env.NOTION_BLOG_ID as string)
     let post: any = posts.find((p) => p!.slug === slug) ?? null;
     post.recordMap = await getPage(post.id);
     post = JSON.parse(JSON.stringify(post));
