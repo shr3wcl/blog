@@ -52,6 +52,10 @@ export const PostView = ({post}: { post: Post }) => {
                 display: flex;
               }
 
+              .notion-text{
+                margin: 4px 0;
+              }
+
               ul {
                 list-style-type: disc !important;
                 list-style-position: inside !important;
