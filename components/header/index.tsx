@@ -12,11 +12,11 @@ import {IoPersonOutline} from "react-icons/io5";
 
 
 const navigation = [
-    {name: 'Blog', href: '/', logo: <CiStickyNote/>, current: false},
-    {name: 'Projects', href: '/projects', logo: <GoLightBulb/>, current: false},
-    {name: 'Saved', href: '/article', logo: <MdOutlineArticle/>, current: false},
-    {name: 'Video', href: '/video', logo: <CiVideoOn/>, current: false},
-    {name: 'Self', href: '/me', logo: <IoPersonOutline/>, current: false}
+    {name: 'Blog', href: '/', logo: '📜', current: false},
+    {name: 'Projects', href: '/projects', logo: '🚩', current: false},
+    {name: 'Saved', href: '/article', logo: '📰', current: false},
+    {name: 'Video', href: '/video', logo: '🎞️', current: false},
+    {name: 'Self', href: '/me', logo: '🙋', current: false}
 ]
 
 function DarkModeButton(isDarkMode: any, setDarkMode: any) {

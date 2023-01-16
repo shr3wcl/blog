@@ -9,7 +9,7 @@ const Myself = () => {
             <div className={"flex justify-center flex-col items-center mt-6 px-4"}>
                 <figure className="max-w-screen-md mx-auto text-center">
                     <blockquote>
-                        <p className="text-2xl italic font-medium text-gray-900 dark:text-white">❝Being the richest man in the cemetery doesn’t matter to me … Going to bed at night saying we’ve done something wonderful … that’s what matters to me.❞</p>
+                        <p className="text-2xl italic font-medium text-gray-900 dark:text-white">❝Being the richest man in the cemetery does not matter to me … Going to bed at night saying we’ve done something wonderful … that’s what matters to me.❞</p>
                     </blockquote>
                     <figcaption className="flex items-center justify-center mt-2 space-x-3 float-right">
                             <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
