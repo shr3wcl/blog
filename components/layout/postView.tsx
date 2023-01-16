@@ -48,6 +48,8 @@ export const PostView = ({post}: { post: Post }) => {
                 }} recordMap={post.recordMap} fullPage={true} darkMode={false} showTableOfContents
                                 minTableOfContentsItems={3} className={"dark:bg-[#171717]"}/>
             </article>
+            
+            <Style/>
         </div>
     )
 }
