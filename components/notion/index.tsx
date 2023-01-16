@@ -108,12 +108,11 @@ export const getPosts = async ( databaseId: string) => {
 }
 
 export const getPage = async (pageId: string) => {
-    const page = await notionApi.getPage(pageId);
-    return page
+    return await notionApi.getPage(pageId);
 }
 
 export const updateProperties = async (pageId: string, properties: any) => {
-    const response = await notion.pages.update({
+    await notion.pages.update({
         page_id: pageId,
         properties,
     });
