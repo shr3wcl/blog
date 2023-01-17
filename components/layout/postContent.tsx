@@ -4,8 +4,6 @@ import {Post} from '../notion/postType'
 import {MdUpdate, MdOutlineDescription} from "react-icons/md";
 dayjs().format()
 
-
-
 export const PostContent = ({post}: { post: Post }) => {
     return (
         <Link href={`/blog/${post.slug}`} className="card-body" key={`${post.id}_content`}>
