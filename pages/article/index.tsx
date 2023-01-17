@@ -1,8 +1,9 @@
 import Head from "next/head";
 import ArticleList from "../../components/article";
-import useSWR, { Key, Fetcher } from 'swr'
-import fetch from "node-fetch";
+import useSWR from 'swr'
 import axios from "axios";
+import Loading from "../../components/loading";
+import ErrorPage from "../../components/error";
 
 // export const getStaticProps = async () => {
 //     const res = await fetch("https://api.raindrop.io/rest/v1/raindrops/30340862",
@@ -31,8 +32,8 @@ const useArticle = () => {
 
 const Article = () => {
     const {article, isLoading, isError} = useArticle();
-    if (isLoading) return console.log(1);
-    if (isError) return console.log(2);
+    if (isLoading) return <Loading/>;
+    if (isError) return <ErrorPage/>;
     return (
         <div>
             <Head>
