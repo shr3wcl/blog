@@ -35,11 +35,13 @@ const Article = () => {
     if (isLoading) return <Loading/>;
     if (isError) return <ErrorPage/>;
     return (
-        <div>
+        <div className={""}>
             <Head>
                 <title>Article Saved</title>
             </Head>
-            <ArticleList articleList={article.items}/>
+            <div>
+                <ArticleList articleList={article.items}/>
+            </div>
         </div>
     )
 }
