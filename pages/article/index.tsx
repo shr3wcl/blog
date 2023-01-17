@@ -12,7 +12,7 @@ export const getStaticProps = async () => {
     return {
         props: {
             articleList: data.items,
-            revalidate: 60 * 60
+            revalidate: 10
         }
     }
 }
