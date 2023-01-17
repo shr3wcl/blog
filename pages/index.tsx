@@ -30,7 +30,7 @@ export const getStaticProps = async () => {
         let props = {posts: posts, hashtag_list: hashtag_list};
         props = JSON.parse(JSON.stringify(props));
 
-        return { props, revalidate: 60 * 60 }
+        return { props, revalidate: 10 }
     } catch (err) {
         console.error('page error', err)
         throw err
