@@ -14,6 +14,8 @@ function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(" ");
 }
 
+
+
 export const getStaticProps = async () => {
     try {
         let posts = await getPosts(NOTION_BLOG_ID ?? '');

@@ -16,7 +16,7 @@ const ProjectList = ({projects}: any) => {
                     {/*<img src={""} alt="Thumbnails" className={"w-52 p-1 rounded-xl"}/>*/}
                     <div className={"flex"}>
                       <span className={"relative top-1 mr-1"}><BiBookBookmark/></span>
-                      <span className={"dark:text-blue-400 font-semibold"}>{each.name}</span>
+                      <span className={"dark:text-blue-400 text-blue-500 font-semibold"}>{each.name}</span>
                       <p className={"border border-gray-400 rounded-xl text-blue-400 px-1 dark:border-[#768390] ml-1 text-sm h-fit"}>Public</p>
                     </div>
                     <span className={"text-sm text-gray-500 mb-1 flex"}>
