@@ -5,10 +5,10 @@ import axios from "axios";
 import Loading from "../../components/loading";
 import ErrorPage from "../../components/error";
 
-const fetcher = (url: string, token: any) => axios.get(url).then(res => res.data).catch(err => console.log(err));
+const fetcher = (url: string) => axios.get(url).then(res => res.data).catch(err => console.log(err));
 
 const useProjects = () => {
-    const {data, error, isLoading} = useSWR("https://api.github.com/users/Bin-08-01/repos", fetcher);
+    const {data, error, isLoading} = useSWR("https://api.github.com/users/Bin-08-01/repos?sort=-created&sort=-updated", fetcher);
     return {
         projects: data,
         isLoading,
