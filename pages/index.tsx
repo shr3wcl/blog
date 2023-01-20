@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
-import {getPosts, getPage, getHashtags, usePage, usePosts} from '../components/notion'
+import {getPosts, getPage, getHashtags} from '../components/notion'
 import {Post, Hashtag} from '../components/notion/postType'
 import {PostContent} from '../components/layout/postContent'
-import Link from "next/link";
 
 const NOTION_BLOG_ID = process.env.NOTION_BLOG_ID;
 
