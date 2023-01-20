@@ -42,15 +42,18 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
     const router = useRouter();
     let {hashtags} = router.query;
 
-    let [show_posts, setShow_posts] = useState(posts);
+    const [show_posts, setShow_posts] = useState(posts);
+    const [hashtagCheck, setHashtagCheck] = useState(hashtags);
 
     useEffect(()=>{
         if(hashtags && typeof hashtags === 'string'){
             const hashtagName = hashtags.split(',')[0];
             const newPosts = posts.filter(post => post.hashtags.includes(hashtagName));
             setShow_posts(newPosts);
+            setHashtagCheck(hashtagName);
         }else{
             setShow_posts(posts);
+            setHashtagCheck('');
         }
     }, [hashtags]);
 
@@ -71,9 +74,9 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
                     <div className={"flex flex-wrap"}>
                         {hashtag_list.map((hashtag) => (
                             <div key={`hashtag-${hashtag.name}`} onClick={() => hashtagChange(hashtag.name)}>
-                                <div className={"mr-2 mt-3"} key={`hashtag-${hashtag.name}-field`}>
+                                <div key={`hashtag-${hashtag.name}-field`}  className={(hashtagCheck === hashtag.name) ? 'mr-2 mt-3 border text-green-600 font-extrabold' : 'mr-2 mt-3 text-gray-700 '}>
                                     <label
-                                        className={`form-check-label cursor-pointer rounded px-1 py-1 text-gray-700 notion-${hashtag.color}_background`}
+                                        className={`form-check-label cursor-pointer rounded px-1 py-1 notion-${hashtag.color}_background`}
                                         htmlFor={`hashtag-${hashtag.name}`}>
                                         {hashtag.name}: {hashtag.count}
                                     </label>
