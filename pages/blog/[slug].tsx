@@ -2,6 +2,7 @@ import {getPosts, getPage} from '../../components/notion'
 import {Post} from '../../components/notion/postType'
 import {PostView} from "../../components/layout/postView";
 
+
 export default function PostDetail({post}: { post: Post }) {
     if (!post) {
         return <div/>
@@ -10,6 +11,7 @@ export default function PostDetail({post}: { post: Post }) {
     return (
         <div className=" mx-auto font-sans w-full dark:bg-[#171717] min-h-screen">
             <PostView post={post}/>
+
         </div>
     )
 }
