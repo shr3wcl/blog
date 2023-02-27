@@ -70,6 +70,8 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
     return (
         <div className={"dark:bg-[#171717] dark:text-gray-50 min-h-screen w-full"}>
             <div className="max-w-5xl px-4 mx-auto mt-10 sm:px-6 lg:px-0">
+
+                {/*List Hashtag*/}
                 <div className="accordion-body mb-5 ">
                     <h3 className={"font-semibold my-2"}># Hashtag</h3>
                     <div className={"flex flex-wrap"}>
@@ -88,8 +90,8 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
                     </div>
                 </div>
 
-                <h5 className={"mb-3"}>✨ Newest</h5>
-
+                {/*Newest*/}
+                {hashtagCheck ? <></> : <h5 className={"mb-3"}>✨ Newest</h5>}
                 <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
                     {show_posts.map((post: Post) => {
                         if (dayjs(post.date, "YYYY-MM-DD").isAfter(dayjs().subtract(7, "d"))) {
@@ -103,14 +105,16 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
                         }
                     })}
                 </div>
+
+                {/*Category*/}
                 <div>
-                    {hashtag_list.map((hashtag) => {
+                    {hashtag_list.map((hashtag: Hashtag) => {
                         return (
                             <div key={`key-${hashtag.name}`} className={"mt-12"}>
-                                <h5 className={"mb-3"}>{hashtag.name}</h5>
+                                {hashtagCheck ? <></> : <h5 className={"mb-3"}>{hashtag.name}</h5>}
 
                                 <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
-                                    {posts.map((post) => {
+                                    {show_posts.map((post: Post) => {
                                         if(post.hashtags.includes(hashtag.name)){
                                             return (
                                                 <div
