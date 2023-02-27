@@ -35,8 +35,8 @@ export const PostView = ({post}: { post: Post }) => {
                 <title>{post.title}</title>
             </Head>
             <header
-                className={"sticky top-0 mt-2 py-2 px-4 w-full bg-white dark:bg-[#171717] z-20 flex justify-between"}>
-                <span className={"truncate text-inherit"}>{post.title}</span>
+                className={"sticky top-0 mt-2 py-2 px-4 w-full bg-white dark:bg-[#171717] z-20 flex justify-between z-[120]"}>
+                <span className={"truncate text-inherit dark:text-gray-500"}>{post.title}</span>
                 <span className={"hidden md:flex"}>🕗 <span
                     className={"ml-2"}>{dayjs(post.date, "MM-DD-YYYY").format("hh:mm | MMM DD, YYYY")}</span></span>
             </header>
