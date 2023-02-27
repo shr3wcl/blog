@@ -22,7 +22,10 @@ const Modal = dynamic(
 // const TweetRender = ({ id }: { id: string }) => {
 //     return <TweetEmbed tweetId={id} />;
 // };
-
+const ReactGiscus = dynamic(() => import("../../components/comment"), {
+    ssr: false,
+    loading: () => <p>Loading Comments...</p>,
+});
 export const PostView = ({post}: { post: Post }) => {
 
     return (
@@ -49,6 +52,18 @@ export const PostView = ({post}: { post: Post }) => {
                 }} recordMap={post.recordMap} fullPage={true} darkMode={false} showTableOfContents
                                 minTableOfContentsItems={3} className={"dark:bg-[#171717]"}/>
             </article>
+            <div className="max-w-5xl mx-auto">
+                <ReactGiscus
+                    repo="Bin-08-01/blog"
+                    repoId="R_kgDOIttA_A"
+                    category="General"
+                    categoryId="DIC_kwDOIttA_M4CUfoM"
+                    dataMapping="title"
+                    dataTerm={() => "en"}
+                    theme="preferred_color_scheme"
+                />
+
+            </div>
         </div>
     )
 }

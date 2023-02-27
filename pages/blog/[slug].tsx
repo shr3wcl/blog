@@ -1,12 +1,8 @@
 import {getPosts, getPage} from '../../components/notion'
 import {Post} from '../../components/notion/postType'
 import {PostView} from "../../components/layout/postView";
-import dynamic from "next/dynamic";
 
-const ReactGiscus = dynamic(() => import("../../components/comment"), {
-    ssr: false,
-    loading: () => <p>Loading Comments...</p>,
-});
+
 export default function PostDetail({post}: { post: Post }) {
     if (!post) {
         return <div/>
@@ -15,18 +11,7 @@ export default function PostDetail({post}: { post: Post }) {
     return (
         <div className=" mx-auto font-sans w-full dark:bg-[#171717] min-h-screen">
             <PostView post={post}/>
-            <div className="max-w-5xl mx-auto">
-                <ReactGiscus
-                    repo="Bin-08-01/blog"
-                    repoId="R_kgDOIttA_A"
-                    category="General"
-                    categoryId="DIC_kwDOIttA_M4CUfoM"
-                    dataMapping="title"
-                    dataTerm={() => "en"}
-                    theme="preferred_color_scheme"
-                />
 
-            </div>
         </div>
     )
 }
