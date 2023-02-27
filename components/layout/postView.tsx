@@ -52,6 +52,7 @@ export const PostView = ({post}: { post: Post }) => {
                 }} recordMap={post.recordMap} fullPage={true} darkMode={false} showTableOfContents
                                 minTableOfContentsItems={3} className={"dark:bg-[#171717]"}/>
             </article>
+
             <div className="max-w-5xl mx-auto">
                 <ReactGiscus
                     repo="Bin-08-01/blog"
@@ -64,6 +65,10 @@ export const PostView = ({post}: { post: Post }) => {
                 />
             <Style/>
             </div>
+
+            
+            <Style/>
+
         </div>
     )
 }
