@@ -65,7 +65,6 @@ export const PostView = ({post}: { post: Post }) => {
                 />
             </div>
 
-
             <Style/>
 
         </div>
