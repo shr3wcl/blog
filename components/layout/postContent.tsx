@@ -9,6 +9,8 @@ export const PostContent = ({post}: { post: Post }) => {
         <Link href={`/blog/${post.slug}`} className="card-body" key={`${post.id}_content`}>
             <div className='notion light-mode notion-page notion-block mx-3 h-full flex flex-col'>
                 <div className={"justify-items-start h-3/4"}>
+
+                    {/*Title of post*/}
                     <div className="card-title d-flex align-items-center">
                         <div className="profile align-items-center">
                             <div>
@@ -23,11 +25,14 @@ export const PostContent = ({post}: { post: Post }) => {
                             </div>
                         </div>
                     </div>
+
                     <h6 className="card-subtitle mb-2 text-muted text-sm text-gray-400 flex" id={`${post.id}_published_at`}>
                         <MdUpdate
                             className={"relative top-1 mr-1"}/>{dayjs(post.date, "MM-DD-YYYY").format("hh:mm | MMM DD, YYYY")}
                     </h6>
                 </div>
+
+                {/*Hashtag*/}
                 <div className="d-flex flex flex-row my-2 justify-items-end">
                     {post.hashtags?.map((hashtag) => {
                         return (
