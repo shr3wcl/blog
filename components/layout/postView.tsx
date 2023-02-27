@@ -53,7 +53,7 @@ export const PostView = ({post}: { post: Post }) => {
                                 minTableOfContentsItems={3} className={"dark:bg-[#171717]"}/>
             </article>
 
-            <div className="max-w-5xl mx-auto">
+            <div className="mx-3 xl:mx-40 sm:mx-3 lg:mx-20">
                 <ReactGiscus
                     repo="Bin-08-01/blog"
                     repoId="R_kgDOIttA_A"
@@ -63,10 +63,8 @@ export const PostView = ({post}: { post: Post }) => {
                     dataTerm={() => "en"}
                     theme="preferred_color_scheme"
                 />
-
             </div>
 
-            
             <Style/>
 
         </div>

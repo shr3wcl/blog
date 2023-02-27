@@ -94,7 +94,7 @@ export default class ReactGiscus extends React.Component<
         return (
             <div>
                 <div ref={this.reference}>
-                {this.state.pending && <p>Loading Comments...</p>}
+                {this.state.pending && <p className={"text-center text-blue-600"}>Loading Comments...</p>}
                     </div>
                     </div>
         );
