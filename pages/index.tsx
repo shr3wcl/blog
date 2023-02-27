@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import {getPosts, getPage, getHashtags} from '../components/notion'
 import {Post, Hashtag} from '../components/notion/postType'
 import {PostContent} from '../components/layout/postContent'
+import dayjs from "dayjs";
 
 const NOTION_BLOG_ID = process.env.NOTION_BLOG_ID;
 
@@ -45,13 +46,13 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
     const [show_posts, setShow_posts] = useState(posts);
     const [hashtagCheck, setHashtagCheck] = useState(hashtags);
 
-    useEffect(()=>{
-        if(hashtags && typeof hashtags === 'string'){
+    useEffect(() => {
+        if (hashtags && typeof hashtags === 'string') {
             const hashtagName = hashtags.split(',')[0];
             const newPosts = posts.filter(post => post.hashtags.includes(hashtagName));
             setShow_posts(newPosts);
             setHashtagCheck(hashtagName);
-        }else{
+        } else {
             setShow_posts(posts);
             setHashtagCheck('');
         }
@@ -74,7 +75,8 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
                     <div className={"flex flex-wrap"}>
                         {hashtag_list.map((hashtag) => (
                             <div key={`hashtag-${hashtag.name}`} onClick={() => hashtagChange(hashtag.name)}>
-                                <div key={`hashtag-${hashtag.name}-field`}  className={(hashtagCheck === hashtag.name) ? 'mr-2 mt-3 border text-green-600 font-extrabold' : 'mr-2 mt-3 text-gray-700 '}>
+                                <div key={`hashtag-${hashtag.name}-field`}
+                                     className={(hashtagCheck === hashtag.name) ? 'mr-2 mt-3 border text-green-600 font-extrabold' : 'mr-2 mt-3 text-gray-700 '}>
                                     <label
                                         className={`form-check-label cursor-pointer rounded px-1 py-1 notion-${hashtag.color}_background`}
                                         htmlFor={`hashtag-${hashtag.name}`}>
@@ -87,14 +89,54 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
                 </div>
 
                 <h5 className={"mb-3"}>✨ Newest</h5>
+
                 <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
-                    {show_posts.map((post: Post) => (
-                        <div
-                            className="card dark:bg-[#111827] border-[1px] border-gray-300 hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48"
-                            key={post.id}>
-                            <PostContent post={post}/>
-                        </div>
-                    ))}
+                    {show_posts.map((post: Post) => {
+                        if (dayjs(post.date, "YYYY-MM-DD").isAfter(dayjs().subtract(7, "d"))) {
+                            return (
+                                <div
+                                    className="card dark:bg-[#111827] border-[1px] border-gray-300 hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48"
+                                    key={post.id}>
+                                    <PostContent post={post}/>
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
+                <div>
+                    {hashtag_list.map((hashtag) => {
+                        return (
+                            <div key={`key-${hashtag.name}`} className={"mt-12"}>
+                                <h5 className={"mb-3"}>{hashtag.name}</h5>
+
+                                <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
+                                    {posts.map((post) => {
+                                        if(post.hashtags.includes(hashtag.name)){
+                                            return (
+                                                <div
+                                                    className="card dark:bg-[#111827] border-[1px] border-gray-300 hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48"
+                                                    key={post.id}>
+                                                    <PostContent post={post}/>
+                                                </div>
+                                            )
+                                        }
+                                    })}
+                                </div>
+                            </div>
+
+                        )
+                    })}
+                    {/*{show_posts.map((post: Post) => {*/}
+                    {/*    if(dayjs(post.date, "YYYY-MM-DD").isAfter(dayjs().subtract(7, "d"))){*/}
+                    {/*        return (*/}
+                    {/*            <div*/}
+                    {/*                className="card dark:bg-[#111827] border-[1px] border-gray-300 hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48"*/}
+                    {/*                key={post.id}>*/}
+                    {/*                <PostContent post={post}/>*/}
+                    {/*            </div>*/}
+                    {/*        )*/}
+                    {/*    }*/}
+                    {/*})}*/}
                 </div>
             </div>
         </div>
