@@ -63,10 +63,9 @@ export const PostView = ({post}: { post: Post }) => {
                     dataTerm={() => "en"}
                     theme="preferred_color_scheme"
                 />
-            <Style/>
             </div>
 
-            
+
             <Style/>
 
         </div>
