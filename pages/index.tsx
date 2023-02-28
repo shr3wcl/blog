@@ -110,7 +110,7 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
                 <div>
                     {hashtag_list.map((hashtag: Hashtag) => {
                         return (
-                            <div key={`key-${hashtag.name}`} className={"mt-12"}>
+                            <div key={`key-${hashtag.name}`} className={"mt-12"} id={`hashtag-${hashtag.name}`}>
                                 {hashtagCheck ? <></> : <h5 className={"mb-3"}>{hashtag.name}</h5>}
 
                                 <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
