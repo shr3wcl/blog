@@ -24,8 +24,11 @@ const Myself = () => {
                      src="https://avatars.githubusercontent.com/u/89400593"
                      alt="Bonnie image"/>
                 <h5 className="text-blue-500 mb-1 text-xl font-medium dark:text-white">Phạm Minh Trí</h5>
+                <h6 className="text-blue-500 mb-1 text-xl dark:text-white">A.k.a: <b>Bin</b></h6>
                 <span className="text-sm text-gray-500 dark:text-gray-400">Software Engineer</span>
+
             </div>
+
         </div>
     )
 }

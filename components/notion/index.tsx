@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client'
 import { NotionAPI } from 'notion-client'
 import { Post, Hashtag } from './postType'
+import useSWR from 'swr'
 
 const notion = new Client({
     auth: process.env.NOTION_KEY,
@@ -10,6 +11,16 @@ const notionApi = new NotionAPI({
     authToken: process.env.TOKEN_V2,
 });
 
+export const usePosts = (databaseId:any) => {
+    const {data} = useSWR(databaseId, (id: any) => notion.databases.query({database_id: id}))
+    return{
+        posts: data
+    }
+}
+
+export const usePage = async (pageId: string) => {
+    const {data} = useSWR(pageId, id => notionApi.getPage(id).then(res => console.log(res)));
+}
 export const getPosts = async ( databaseId: string) => {
     const response = await notion.databases.query({
         database_id: databaseId,
