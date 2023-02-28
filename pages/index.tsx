@@ -91,31 +91,39 @@ export default function NotionDomainPage({posts, hashtag_list}: { posts: Post[],
                 </div>
 
                 {/*Newest*/}
-                {hashtagCheck ? <></> : <h5 className={"mb-3"}>✨ Newest</h5>}
-                <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
-                    {show_posts.map((post: Post) => {
-                        if (dayjs(post.date, "YYYY-MM-DD").isAfter(dayjs().subtract(7, "d"))) {
-                            return (
-                                <div
-                                    className="card dark:bg-[#111827] border-[1px] border-gray-300 hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48"
-                                    key={post.id}>
-                                    <PostContent post={post}/>
-                                </div>
-                            )
-                        }
-                    })}
-                </div>
+                {hashtagCheck ? <></> :
+                    (
+                        <div>
+                            <h5 className={"mb-3"}>✨ Newest</h5>
+                            <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
+                                {show_posts.map((post: Post) => {
+                                    if (dayjs(post.date, "YYYY-MM-DD").isAfter(dayjs().subtract(7, "d"))) {
+                                        return (
+                                            <div
+                                                className="card dark:bg-[#111827] border-[1px] border-gray-300 hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48"
+                                                key={post.id}>
+                                                <PostContent post={post}/>
+                                            </div>
+                                        )
+                                    }
+                                })}
+                            </div>
+                        </div>
+                    )
+
+                }
+
 
                 {/*Category*/}
                 <div>
                     {hashtag_list.map((hashtag: Hashtag) => {
                         return (
                             <div key={`key-${hashtag.name}`} className={"mt-12"} id={`hashtag-${hashtag.name}`}>
-                                {hashtagCheck ? <></> : <h5 className={"mb-3"}>{hashtag.name}</h5>}
+                                <h5 className={"mb-3"}>{hashtag.name}</h5>
 
                                 <div className={"grid grid-cols-1 gap-4 sm:grid-cols-2"}>
                                     {show_posts.map((post: Post) => {
-                                        if(post.hashtags.includes(hashtag.name)){
+                                        if (post.hashtags.includes(hashtag.name)) {
                                             return (
                                                 <div
                                                     className="card dark:bg-[#111827] border-[1px] border-gray-300 hover:border-blue-400 dark:hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 w-full max-h-48"
