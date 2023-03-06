@@ -31,7 +31,9 @@ export const PostView = ({post}: { post: Post }) => {
     return (
         <div className={"w-full dark:bg-[#171717] dark:text-gray-50 "}>
             <Head>
+                <meta name={"title"} content={post.title}/>
                 <meta name="description" content={post.description}/>
+                <meta name="content" content={post.recordMap}/>
                 <title>{post.title}</title>
             </Head>
             <header
