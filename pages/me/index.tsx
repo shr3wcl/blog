@@ -6,7 +6,7 @@ const Myself = () => {
             <Head>
                 <title>Me</title>
             </Head>
-            <div className={"flex justify-center flex-col items-center mt-6 px-4"}>
+            <div className={"flex justify-center flex-col items-center mt-6 px-4 font-personal"}>
                 <figure className="max-w-screen-md mx-auto text-center">
                     <blockquote>
                         <p className="text-2xl italic font-medium text-gray-900 dark:text-white">❝Being the richest man in the cemetery does not matter to me … Going to bed at night saying we’ve done something wonderful … that’s what matters to me.❞</p>

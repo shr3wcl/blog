@@ -5,6 +5,9 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
   theme: {
+    fontFamily: {
+      'personal': ['Tourney', "cursive"]
+    },
     extend: {
       colors: {
         gray: colors.neutral,
