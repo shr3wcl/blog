@@ -34,6 +34,8 @@ export const PostView = ({post}: { post: Post }) => {
                 <meta name={"title"} content={post.title}/>
                 <meta name="description" content={post.description}/>
                 <meta name="content" content={post.recordMap}/>
+                <meta property="og:title" content={post.title}/>
+                <meta property="og:description" content={post.description}/>
                 <title>{post.title}</title>
             </Head>
             <header
