@@ -10,7 +10,7 @@ const Footer = () => {
                 {/*    <span>Phạm Minh Trí</span>*/}
                 {/*</div>*/}
                 <div className={"flex px-6 min-w-[200px] justify-center flex-col"}>
-                    <div className={"my-3 "}>
+                    <div className={"my-3 select-none"}>
                         <p className={"text-center underline"}>Connect with me</p>
                     </div>
                     <div className={"flex justify-evenly"}>

@@ -8,7 +8,7 @@ const notion = new Client({
 })
 
 const notionApi = new NotionAPI({
-    authToken: process.env.TOKEN_V2,
+    // authToken: process.env.TOKEN_V2,
 });
 
 export const usePosts = (databaseId:any) => {
