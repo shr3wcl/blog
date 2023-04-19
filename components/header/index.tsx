@@ -16,7 +16,8 @@ const navigation = [
     {name: 'Projects', href: '/projects', logo: '🚩', current: false},
     {name: 'Saved', href: '/article', logo: '📰', current: false},
     {name: 'Video', href: '/video', logo: '🎞️', current: false},
-    {name: 'Self', href: '/me', logo: '🙋', current: false}
+    {name: 'Self', href: '/me', logo: '🙋', current: false},
+    {name: 'Certificate', href: '/cert', logo: '🎓', current: false},
 ]
 
 function DarkModeButton(isDarkMode: any, setDarkMode: any) {
