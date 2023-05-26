@@ -9,11 +9,16 @@ const Certificate = () => {
             <Head>
                 <title>Certificate</title>
             </Head>
-            <div className={"flex justify-center flex-col items-center mt-6 px-4 font-personal gap-3"}>
+            <div className={"flex justify-center items-center mt-6 px-4 font-personal gap-3"}>
                 <Link className={"bg-gray-300 rounded-3xl"} href={"https://certificate.givemycertificate.com/c/b8239874-bed8-4734-a3f5-e3586e0b30a9"} target={"_blank"}>
-                    <Image src={"/../public/certificate1.png"} alt={"certificate"} className={"rounded-t-3xl"} width={400} height={400}/>
+                    <Image src={"/../public/certificate1.png"} alt={"certificate"} className={"rounded-t-3xl"} width={480} height={480}/>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <p className={"text-center my-3 text-blue-600"}>Certificate CTF VISHWACTF'2023</p>
+                </Link>
+                <Link className={"bg-gray-300 rounded-3xl"} href={"#"} target={"_blank"}>
+                    <Image src={"/../public/cbjs-cert.png"} alt={"certificate"} className={"rounded-t-3xl"} width={480} height={480}/>
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
+                    <p className={"text-center my-3 text-blue-600"}>Certificate Cyber Jutsu Academy Web 101 2023</p>
                 </Link>
 
             </div>
