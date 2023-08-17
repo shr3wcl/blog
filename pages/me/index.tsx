@@ -28,7 +28,9 @@ const Myself = () => {
                      alt="Avatar"/>
                 <h5 className="text-blue-500 mb-1 text-xl font-medium dark:text-white">Phạm Minh Trí</h5>
                 <h6 className="text-blue-500 mb-1 text-xl dark:text-white">A.k.a: <b>Bin</b></h6>
-                <span className="text-sm text-gray-500 dark:text-gray-400">Software Engineer - Penetration Testing</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">Software Engineer - Security Engineer - Penetration Testing</span>
+                <p className="text-sm text-gray-500 dark:text-gray-400">I'm aiming to be <b>Red Team</b></p>
+                <p></p>
                 <img src="https://tryhackme-badges.s3.amazonaws.com/hyp3r.png" alt="TryHackMe"/>
             </div>
 
