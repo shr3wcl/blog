@@ -98,7 +98,7 @@ const Header = () => {
                                 className="flex">
                                 {DarkModeButton(isDarkMode, setDarkMode)}
                                 <Link href={"/me"} className="relative ml-3">
-                                    <img src={imgLink} alt="avatar"
+                                    <img src={"https://i.pinimg.com/564x/ec/de/7c/ecde7cff66f193fab9d23ac102e61835.jpg"} alt="avatar"
                                          className={"w-[36px] h-[36px] rounded-xl"}/>
                                 </Link>
                             </div>
