@@ -27,7 +27,7 @@ const Myself = () => {
                      src={imgLink}
                      alt="Avatar"/>*/}
                 <img className="w-24 h-24 mb-3 mt-5 rounded-full shadow-lg"
-                     src={"https://i.pinimg.com/564x/b0/9a/86/b09a86367b4d8fc5a27b8dc2c21393c9.jpg"}
+                     src={"https://i.pinimg.com/564x/35/a1/04/35a10487397685cfba103ba38cb50d3e.jpg"}
                      alt="Avatar"/>
                 
                 <h5 className="text-blue-500 mb-1 text-xl font-medium dark:text-white">Phạm Minh Trí</h5>
