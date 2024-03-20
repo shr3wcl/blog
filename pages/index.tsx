@@ -78,7 +78,7 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                                     {show_posts.map((post: Post) => (
                                         dayjs(post.date, 'YYYY-MM-DD').isAfter(dayjs().subtract(7, 'd')) && (
                                             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                                                <PostContent post={post} />
+                                                <PostContent key={post.id} post={post} />
                                             </div>
                                         )
                                     ))}
@@ -96,7 +96,7 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                                         .slice(0, showMore[hashtag.name] ? undefined : 4)
                                         .map((post: Post) => (
                                             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                                                <PostContent post={post} />
+                                                <PostContent key={post.id} post={post} />
                                             </div>
                                         ))}
                                 </div>
