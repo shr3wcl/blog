@@ -44,14 +44,14 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
     useEffect(() => {
         if (hashtags && typeof hashtags === 'string') {
             const hashtagName = hashtags.split(',')[0];
-            const newPosts = posts.filter((post) => post?.hashtags.includes(hashtagName)); // Kiểm tra post có tồn tại không
+            const newPosts = posts.filter((post) => post?.hashtags.includes(hashtagName));
             setShow_posts(newPosts);
             setHashtagCheck(hashtagName);
         } else {
             setShow_posts(posts);
             setHashtagCheck('');
         }
-    }, [hashtags]);
+    }, [hashtags, posts]);
 
     const hashtagChange = async (hashtagName: string) => {
         await router.push({
@@ -89,13 +89,13 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                         )}
 
                         {/* Category */}
-                        {hashtag_list.map((hashtag: Hashtag) => (
-                            <div key={`key-${hashtag.name}`} className="mt-8">
-                                <h2 className="text-2xl font-semibold mb-3">{hashtag.name}</h2>
+                        {hashtags ? (
+                            <div key={`key-${hashtags}`} className="mt-8">
+                                <h2 className="text-2xl font-semibold mb-3">{hashtags}</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {show_posts
-                                        .filter((post: Post | undefined) => post?.hashtags.includes(hashtag.name)) 
-                                        .slice(0, showMore[hashtag.name] ? undefined : 4)
+                                        .filter((post: Post | undefined) => post?.hashtags.includes(hashtags as string))
+                                        .slice(0, showMore[hashtags as string] ? undefined : 4)
                                         .map((post: Post | undefined) => (
                                             post && (
                                                 <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
@@ -104,8 +104,32 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                                             )
                                         ))}
                                 </div>
-                                {show_posts.filter((post: Post | undefined) => post?.hashtags.includes(hashtag.name)).length >
-                                    4 && (
+                                {show_posts.filter((post: Post | undefined) => post?.hashtags.includes(hashtags as string)).length > 4 && (
+                                    <button
+                                        className="mt-4 text-blue-500 hover:text-blue-700 cursor-pointer"
+                                        onClick={() => handleShowMore(hashtags as string)}
+                                    >
+                                        {showMore[hashtags as string] ? 'View Less' : 'View More'}
+                                    </button>
+                                )}
+                            </div>
+                        ) : (
+                            hashtag_list.map((hashtag: Hashtag) => (
+                                <div key={`key-${hashtag.name}`} className="mt-8">
+                                    <h2 className="text-2xl font-semibold mb-3">{hashtag.name}</h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {show_posts
+                                            .filter((post: Post | undefined) => post?.hashtags.includes(hashtag.name))
+                                            .slice(0, showMore[hashtag.name] ? undefined : 4)
+                                            .map((post: Post | undefined) => (
+                                                post && (
+                                                    <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                                                        <PostContent key={post.id} post={post} />
+                                                    </div>
+                                                )
+                                            ))}
+                                    </div>
+                                    {show_posts.filter((post: Post | undefined) => post?.hashtags.includes(hashtag.name)).length > 4 && (
                                         <button
                                             className="mt-4 text-blue-500 hover:text-blue-700 cursor-pointer"
                                             onClick={() => handleShowMore(hashtag.name)}
@@ -113,8 +137,10 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                                             {showMore[hashtag.name] ? 'View Less' : 'View More'}
                                         </button>
                                     )}
-                            </div>
-                        ))}
+                                </div>
+                            ))
+                        )}
+
                     </div>
 
                     {/* List Hashtag */}
