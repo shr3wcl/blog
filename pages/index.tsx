@@ -16,8 +16,10 @@ export const getStaticProps = async () => {
         let posts = await getPosts(NOTION_BLOG_ID ?? '');
 
         for (let post of posts) {
-            await delay(200 + Math.random() * 500);
-            post.recordMap = await getPage(post.id);
+            if (post) { // Kiểm tra post có tồn tại không
+                await delay(200 + Math.random() * 500);
+                post.recordMap = await getPage(post.id);
+            }
         }
 
         let hashtag_list = await getHashtags();
@@ -42,7 +44,7 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
     useEffect(() => {
         if (hashtags && typeof hashtags === 'string') {
             const hashtagName = hashtags.split(',')[0];
-            const newPosts = posts.filter((post) => post.hashtags.includes(hashtagName));
+            const newPosts = posts.filter((post) => post?.hashtags.includes(hashtagName)); // Kiểm tra post có tồn tại không
             setShow_posts(newPosts);
             setHashtagCheck(hashtagName);
         } else {
@@ -56,7 +58,7 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
             pathname: '/',
             query: { hashtags: hashtagName },
         });
-        const newPosts = posts.filter((post) => post.hashtags.includes(hashtagName));
+        const newPosts = posts.filter((post) => post?.hashtags.includes(hashtagName)); // Kiểm tra post có tồn tại không
         setShow_posts(newPosts);
         setShowMore((prevShowMore) => ({ ...prevShowMore, [hashtagName]: false }));
     };
@@ -75,8 +77,8 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                             <div>
                                 <h2 className="text-2xl font-semibold mb-3">✨ Newest</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {show_posts.map((post: Post) => (
-                                        dayjs(post.date, 'YYYY-MM-DD').isAfter(dayjs().subtract(7, 'd')) && (
+                                    {show_posts.map((post: Post | undefined) => (
+                                        post && dayjs(post.date, 'YYYY-MM-DD').isAfter(dayjs().subtract(7, 'd')) && ( 
                                             <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                                                 <PostContent key={post.id} post={post} />
                                             </div>
@@ -92,15 +94,17 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                                 <h2 className="text-2xl font-semibold mb-3">{hashtag.name}</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {show_posts
-                                        .filter((post: Post) => post.hashtags.includes(hashtag.name))
+                                        .filter((post: Post | undefined) => post?.hashtags.includes(hashtag.name)) 
                                         .slice(0, showMore[hashtag.name] ? undefined : 4)
-                                        .map((post: Post) => (
-                                            <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                                                <PostContent key={post.id} post={post} />
-                                            </div>
+                                        .map((post: Post | undefined) => (
+                                            post && (
+                                                <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                                                    <PostContent key={post.id} post={post} />
+                                                </div>
+                                            )
                                         ))}
                                 </div>
-                                {show_posts.filter((post: Post) => post.hashtags.includes(hashtag.name)).length >
+                                {show_posts.filter((post: Post | undefined) => post?.hashtags.includes(hashtag.name)).length >
                                     4 && (
                                         <button
                                             className="mt-4 text-blue-500 hover:text-blue-700 cursor-pointer"
@@ -114,7 +118,7 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                     </div>
 
                     {/* List Hashtag */}
-                    <div className="sticky top-20 h-screen overflow-y-auto" style={{ maxHeight: '80vh' }}> {/* Chiếm 1/3 chiều dài của trang */}
+                    <div className="sticky top-20 h-screen overflow-y-auto" style={{ maxHeight: '80vh' }}> 
                         <h2 className="text-lg font-semibold mb-3"># Hashtag</h2>
                         <div className="flex flex-wrap gap-1">
                             {hashtag_list.map((hashtag) => (
