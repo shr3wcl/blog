@@ -10,6 +10,7 @@ export default function PostDetail({post}: { post: Post }) {
 
     return (
         <div className=" mx-auto font-sans w-full dark:bg-[#171717] min-h-screen">
+            <meta name="description" content={post.title}/>
             <PostView post={post}/>
         </div>
     )

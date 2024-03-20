@@ -7,7 +7,7 @@ import ErrorPage from "../../components/error";
 const fetcher = (url: string) => axios.get(url).then(res => res.data.items).catch(err => console.log(err));
 
 const useVideo = () => {
-    const {data, error, isLoading} = useSWR("https://www.googleapis.com/youtube/v3/search?key=AIzaSyCt16F_lL14GTFLm-a8pFwEN_s5UtfLCJ8&channelId=UCpqUZTgGgqc2C7ae57tOF4Q&part=snippet,id&order=date&maxResults=20", fetcher);
+    const { data, error, isLoading } = useSWR(process.env.NOTION_KEY, fetcher);
     return {
         videoList: data,
         isLoading,

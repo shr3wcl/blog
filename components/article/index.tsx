@@ -4,43 +4,29 @@ import dayjs from "dayjs";
 
 const ArticleList = ({articleList}: any) => {
     return (
-        <article
-            className={"mt-4 grid justify-around grid-cols-1 gap-4 px-6 align-top gap-x-8 md:grid-cols-2 lg:grid-cols-3"}>
-            {articleList.map((article: any) => {
-                return (
-                    <div key={article._id}
-                         className="w-full h-full mx-auto mb-5 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
-                        <Link href={article.link} target={"_blank"}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img className="object-cover w-full h-2/5 rounded-t-lg" src={article.cover} alt=""/>
-                        </Link>
-                        <div className="p-5 h-3/5 flex flex-col justify-between">
-                            <div>
-                                <Link href={article.link} target={"_blank"}>
-                                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{article.title}</h5>
-                                </Link>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{article.excerpt}</p>
-                            </div>
-                            <div className={"w-full flex justify-between item-center"}>
-                                <span className={"text-sm text-gray-500 flex mb-2"}><MdUpdate
-                                    className={"relative top-1 mr-1"}/> {dayjs(article.created, "MM-DD-YYYY").format("hh:mm | MMM DD, YYYY")}</span>
-                                <Link href={article.link} target={"_blank"}
-                                      className="float-right inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Read more
-                                    <svg aria-hidden="true" className="w-4 h-4 ml-2 -mr-1" fill="currentColor"
-                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd"
-                                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                              clipRule="evenodd"/>
-                                    </svg>
-                                </Link>
-                            </div>
-                        </div>
+        <article className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+            {articleList.map((article: any) => (
+                <div key={article._id} className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
+                    <Link href={article.link} target="_blank">
+                        <img className="object-cover w-full h-48" src={article.cover} alt={article.title} />
+                    </Link>
+                    <div className="p-4">
+                        <h5 className="text-lg font-semibold text-gray-900 dark:text-white">{article.title}</h5>
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{article.excerpt}</p>
                     </div>
-
-                )
-            })}
+                    <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-800">
+                        <span className="text-xs text-gray-500"><MdUpdate className="inline-block mr-1" /> {dayjs(article.created, "MM-DD-YYYY").format("hh:mm | MMM DD, YYYY")}</span>
+                        <Link href={article.link} target="_blank" className="px-3 py-1 text-xs font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+                            Read more
+                            <svg className="inline-block w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M10 3a1 1 0 00-1.707-.707l-6 6a1 1 0 000 1.414l6 6A1 1 0 0010 17a1 1 0 00.707-1.707L5.414 11H16a1 1 0 110 2H5.414l5.293 5.293A1 1 0 0010 17a1 1 0 00.707-1.707l-6-6a1 1 0 00-1.707.707l6 6a1 1 0 001.707 0l6-6A1 1 0 0010 3z" />
+                            </svg>
+                        </Link>
+                    </div>
+                </div>
+            ))}
         </article>
+
     )
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export type MappingType =
     | "pathname"
@@ -27,34 +27,20 @@ interface ReactGiscusProps {
     theme: Theme;
 }
 
-interface ReactGiscusState {
-    pending: boolean;
-}
+const ReactGiscus: React.FC<ReactGiscusProps> = ({
+    repo,
+    repoId,
+    category,
+    categoryId,
+    dataMapping,
+    dataTerm,
+    label,
+    theme,
+}) => {
+    const [pending, setPending] = useState<boolean>(true);
+    const reference = useRef<HTMLDivElement>(null);
 
-export default class ReactGiscus extends React.Component<
-    ReactGiscusProps,
-    ReactGiscusState
-> {
-    reference: React.RefObject<HTMLDivElement>;
-    scriptElement: any;
-
-    constructor(props: ReactGiscusProps) {
-        super(props);
-        this.reference = React.createRef<HTMLDivElement>();
-        this.state = { pending: true };
-    }
-
-    componentDidMount(): void {
-        const {
-            repo,
-            repoId,
-            category,
-            categoryId,
-            dataMapping,
-            dataTerm,
-            label,
-            theme,
-        } = this.props;
+    useEffect(() => {
         const scriptElement = document.createElement("script");
         scriptElement.src = "https://giscus.app/client.js";
         scriptElement.async = true;
@@ -65,38 +51,45 @@ export default class ReactGiscus extends React.Component<
         scriptElement.setAttribute("data-category-id", categoryId);
         scriptElement.setAttribute("data-mapping", dataMapping);
         if (dataMapping === "specific" && dataTerm) {
-            scriptElement.setAttribute(
-                "data-term",
-                dataTerm()
-                // window.location.hostname + window.location.pathname
-            );
+            scriptElement.setAttribute("data-term", dataTerm());
         }
         scriptElement.setAttribute("data-reactions-enabled", "1");
         scriptElement.setAttribute("data-emit-metadata", "0");
         scriptElement.setAttribute("data-theme", theme);
         scriptElement.setAttribute("data-lang", "en");
         scriptElement.setAttribute("cross-origin", "anonymous");
-        scriptElement.onload = () => this.setState({ pending: false });
-
         if (label) {
             scriptElement.setAttribute("label", label);
         }
+        scriptElement.onload = () => setPending(false);
 
-        // TODO: Check current availability
-        this.scriptElement = scriptElement;
-
-        setTimeout(() => {
-            this.reference.current?.appendChild(scriptElement);
+        const timeout = setTimeout(() => {
+            if (reference.current) {
+                reference.current.appendChild(scriptElement);
+            }
         }, 3000);
-    }
 
-    render(): React.ReactElement {
-        return (
-            <div>
-                <div ref={this.reference}>
-                {this.state.pending && <p className={"text-center text-blue-600"}>Loading Comments...</p>}
-                    </div>
-                    </div>
-        );
-    }
-    }
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [
+        repo,
+        repoId,
+        category,
+        categoryId,
+        dataMapping,
+        dataTerm,
+        label,
+        theme,
+    ]);
+
+    return (
+        <div ref={reference}>
+            {pending && (
+                <p className={"text-center text-blue-600"}>Loading Comments...</p>
+            )}
+        </div>
+    );
+};
+
+export default ReactGiscus;

@@ -13,12 +13,12 @@ import {IoPersonOutline} from "react-icons/io5";
 const imgLink = "https://avatars.githubusercontent.com/u/89400593"
 
 const navigation = [
-    {name: 'Blog', href: '/', logo: '📜', current: false},
-    {name: 'Projects', href: '/projects', logo: '🚩', current: false},
-    {name: 'Saved', href: '/article', logo: '📰', current: false},
-    {name: 'Video', href: '/video', logo: '🎞️', current: false},
-    {name: 'Self', href: '/me', logo: '🙋', current: false},
-    {name: 'Certificate', href: '/cert', logo: '🎓', current: false},
+    {name: 'Article', href: '/', logo: '📜', current: false},
+    {name: 'Project', href: '/project', logo: '🚩', current: false},
+    // {name: 'Saved', href: '/article', logo: '📰', current: false},
+    // {name: 'Video', href: '/video', logo: '🎞️', current: false},
+    {name: 'About Me', href: '/me', logo: '🙋', current: false},
+    { name: 'Certificate', href: '/certificate', logo: '🎓', current: false},
 ]
 
 function DarkModeButton(isDarkMode: any, setDarkMode: any) {
@@ -50,30 +50,27 @@ const Header = () => {
     const [isDarkMode, setDarkMode] = useDarkMode();
     const router = useRouter();
     return (
-        <Disclosure as="nav"
-                    className="z-10 bg-white border-b border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-600">
-            {({open}) => (
+        <Disclosure as="nav" className="z-10 bg-white border-b border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-600">
+            {({ open }) => (
                 <nav>
                     <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
                         <div className="relative flex h-12 items-center justify-between flex-row">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 <Disclosure.Button
-                                    className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                                    className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                                >
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
-                                        <XMarkIcon className="block h-6 w-6" aria-hidden="true"/>
+                                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                                     ) : (
-                                        <Bars3Icon className="block h-6 w-6" aria-hidden="true"/>
+                                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <div
-                                className="flex flex-1 h-full items-center justify-center sm:items-stretch sm:justify-start">
+                            <div className="flex flex-1 h-full items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <Link href={"/"}
-                                          className="block w-auto dark:text-gray-50"
-                                    >
-                                        Bin blog
+                                    <Link href={"/"} className="block w-auto dark:text-gray-50 font-bold">
+                                        My Blog
                                     </Link>
                                 </div>
                                 <div className="hidden h-full sm:ml-6 sm:block">
@@ -83,23 +80,21 @@ const Header = () => {
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
-                                                    router.pathname === item.href ? 'border-b-blue-500 hover' : 'over:bg-gray-700 hover:border-gray-300',
-                                                    'border-transparent text-gray-500 h-full  dark:text-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+                                                    router.pathname === item.href ? 'border-b-2 border-blue-500' : 'hover:bg-gray-700 hover:text-white',
+                                                    'text-gray-500 dark:text-gray-300 inline-flex items-center px-3 py-2 text-sm font-medium'
                                                 )}
                                                 aria-current={router.pathname.includes(item.href)}
                                             >
-                                                <span className={"mr-2"}>{item.logo}</span>{item.name}
+                                                <span className="mr-2">{item.logo}</span>{item.name}
                                             </Link>
                                         ))}
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                className="flex">
+                            <div className="flex items-center">
                                 {DarkModeButton(isDarkMode, setDarkMode)}
                                 <Link href={"/me"} className="relative ml-3">
-                                    <img src={"https://i.pinimg.com/564x/ec/de/7c/ecde7cff66f193fab9d23ac102e61835.jpg"} alt="avatar"
-                                         className={"w-[36px] h-[36px] rounded-xl"}/>
+                                    <img src={imgLink} alt="avatar" className="w-9 h-9 rounded-full" />
                                 </Link>
                             </div>
                         </div>
@@ -107,9 +102,8 @@ const Header = () => {
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pt-2 pb-3">
                             {navigation.map((item) => (
-                                <Disclosure.Button
+                                <Link
                                     key={item.name}
-                                    as="a"
                                     href={item.href}
                                     className={classNames(
                                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
@@ -117,15 +111,15 @@ const Header = () => {
                                     )}
                                     aria-current={item.current ? 'page' : undefined}
                                 >
-                                    <span className={"relative top-1 mr-2 "}>{item.logo}</span> {item.name}
-                                </Disclosure.Button>
+                                    <span className={"relative top-1 mr-2"}>{item.logo}</span> {item.name}
+                                </Link>
                             ))}
                         </div>
                     </Disclosure.Panel>
                 </nav>
             )}
-
         </Disclosure>
+
     )
 }
 
