@@ -24,7 +24,7 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 //     }
 // }
 
-const fetcher = (url: string, token: any) => axios.get(url, {headers: { Authorization: `Bearer ${token}`}}).then(res => res.data).catch(err => console.log(err));
+const fetcher = (url: string, token: any) => axios.get(url, {headers: { Authorization: `Bearer ${token}`}}).then(res => res.data).catch(err => {throw err});
 const useArticle = (page: number, search: string) => {
     const {data, error, isLoading} = useSWR([`https://api.raindrop.io/rest/v1/raindrops/30340862?sort=-created&perpage=10&page=${page}&search=${search}`, process.env.RAINDROP_TOKEN], ([url, token]) => fetcher(url, token));
     const dataTags = useSWR([`https://api.raindrop.io/rest/v1/tags/30340862`, process.env.RAINDROP_TOKEN], ([url, token]) => fetcher(url, token));

@@ -4,6 +4,8 @@ import { getPosts, getPage, getHashtags } from '../components/notion';
 import { Post, Hashtag } from '../components/notion/postType';
 import { PostContent } from '../components/layout/postContent';
 import dayjs from 'dayjs';
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const NOTION_BLOG_ID = process.env.NOTION_BLOG_ID;
 
@@ -11,29 +13,33 @@ function delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ locale }: any) => {
     try {
         let posts = await getPosts(NOTION_BLOG_ID ?? '');
 
         for (let post of posts) {
-            if (post) { // Kiểm tra post có tồn tại không
+            if (post) {
                 await delay(200 + Math.random() * 500);
                 post.recordMap = await getPage(post.id);
             }
         }
 
         let hashtag_list = await getHashtags();
-        let props = { posts: posts, hashtag_list: hashtag_list };
+        let props = {
+            posts: posts,
+            hashtag_list: hashtag_list,
+            ...(await serverSideTranslations(locale, ['common'], null, ['en', 'vi'])),
+        };
         props = JSON.parse(JSON.stringify(props));
 
         return { props, revalidate: 10 };
     } catch (err) {
-        console.error('page error', err);
         throw err;
     }
 };
 
 export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[]; hashtag_list: Hashtag[] }) {
+    const { t } = useTranslation("common");
     const router = useRouter();
     let { hashtags } = router.query;
 
@@ -58,7 +64,7 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
             pathname: '/',
             query: { hashtags: hashtagName },
         });
-        const newPosts = posts.filter((post) => post?.hashtags.includes(hashtagName)); // Kiểm tra post có tồn tại không
+        const newPosts = posts.filter((post) => post?.hashtags.includes(hashtagName)); 
         setShow_posts(newPosts);
         setShowMore((prevShowMore) => ({ ...prevShowMore, [hashtagName]: false }));
     };
@@ -73,7 +79,7 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2">
                         {/* Newest */}
-                        {!hashtagCheck && (
+                        {(hashtagCheck !== '') && (
                             <div>
                                 <h2 className="text-2xl font-semibold mb-3">✨ Newest</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -92,6 +98,13 @@ export default function NotionDomainPage({ posts, hashtag_list }: { posts: Post[
                         {hashtags ? (
                             <div key={`key-${hashtags}`} className="mt-8">
                                 <h2 className="text-2xl font-semibold mb-3">{hashtags}</h2>
+                                {
+                                    // Check if hashtag not have any post
+                                    show_posts.filter((post: Post | undefined) => post?.hashtags.includes(hashtags as string)).length === 0 && (
+                                        <div className="text-center text-2xl font-semibold mb-3">Chưa có bài viết nào</div>
+                                    )
+                                
+                                }
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {show_posts
                                         .filter((post: Post | undefined) => post?.hashtags.includes(hashtags as string))

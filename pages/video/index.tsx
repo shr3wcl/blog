@@ -4,10 +4,11 @@ import axios from "axios";
 import useSWR from "swr";
 import Loading from "../../components/loading";
 import ErrorPage from "../../components/error";
-const fetcher = (url: string) => axios.get(url).then(res => res.data.items).catch(err => console.log(err));
+
+const fetcher = (url: string) => axios.get(url).then(res => res.data.items).catch(err => {throw err});
 
 const useVideo = () => {
-    const { data, error, isLoading } = useSWR(process.env.NOTION_KEY, fetcher);
+    const { data, error, isLoading } = useSWR(process.env.URL_YOUTUBE, fetcher);
     return {
         videoList: data,
         isLoading,

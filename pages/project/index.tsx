@@ -7,9 +7,9 @@ import ErrorPage from "../../components/error";
 // ENV
 
 
-const fetcher = (url: string) => axios.get(url).then(res => res.data).catch(err => console.log(err));
+const fetcher = (url: string) => axios.get(url).then(res => res.data).catch(err => {throw err});
 const useProjects = () => {
-    const { data, error, isLoading } = useSWR("https://api.github.com/users/shr3wcl/repos?sort=-created&sort=-updated", fetcher);
+    const { data, error, isLoading } = useSWR(process.env.URL_GITHUB, fetcher);
     return {
         projects: data,
         isLoading,

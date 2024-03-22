@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
+import { Accordion, AccordionItem } from 'react-accessible-accordion';
 import dayjs from "dayjs";
 import Style from "./style";
 
@@ -30,6 +31,14 @@ export const PostView = ({post}: { post: Post }) => {
 
     return (
         <div className="w-full min-h-screen dark:bg-[#171717] dark:text-gray-50">
+            <Head>
+                <title>{post.title}</title>
+                <meta name="description" content={post.description}/>
+                <meta name="description" content="Writeup, Blog"/>
+                <meta name="description" content=" CTF Player, CTF Warrior, CTF VKU, CTF VSL, Cyber Security, Web, RE, PWN, Reverse Engineering, Binary Exploitation"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link rel="icon" href="/img/avatar.png"/>
+            </Head>
             <header className="sticky top-0 py-2 px-4 w-full bg-white dark:bg-[#171717] z-20 flex justify-between shadow-md">
                 <span className="truncate text-inherit dark:text-gray-500">{post.title}</span>
                 <span className="hidden md:flex items-center">
@@ -44,8 +53,8 @@ export const PostView = ({post}: { post: Post }) => {
                             recordMap={post.recordMap}
                             fullPage={true}
                             darkMode={false}
-                            showTableOfContents
-                            minTableOfContentsItems={3}
+                            showTableOfContents={true}
+                            minTableOfContentsItems={0}
                             className="dark:bg-[#171717]"
                         />
                     </div>
@@ -57,7 +66,7 @@ export const PostView = ({post}: { post: Post }) => {
             </div>
             <div className="mx-3 xl:mx-40 sm:mx-3 lg:mx-20 mt-8 mb-4">
                 <ReactGiscus
-                    repo="Bin-08-01/blog"
+                    repo="shr3wcl/blog"
                     repoId="R_kgDOIttA_A"
                     category="General"
                     categoryId="DIC_kwDOIttA_M4CUfoM"

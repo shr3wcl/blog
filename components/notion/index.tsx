@@ -19,7 +19,7 @@ export const usePosts = (databaseId:any) => {
 }
 
 export const usePage = async (pageId: string) => {
-    const {data} = useSWR(pageId, id => notionApi.getPage(id).then(res => console.log(res)));
+    const {data} = useSWR(pageId, id => notionApi.getPage(id).then(res => {throw res}));
 }
 export const getPosts = async ( databaseId: string) => {
     const response = await notion.databases.query({

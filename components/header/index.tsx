@@ -1,24 +1,24 @@
 import Link from "next/link";
-import {Switch} from '@headlessui/react';
-import {Disclosure} from '@headlessui/react';
+import { Switch } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import useDarkMode from "./useDarkMode";
-import {useRouter} from "next/router";
-import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
-import {BiMoon, BiSun} from "react-icons/bi";
-import {CiStickyNote, CiVideoOn} from "react-icons/ci";
-import {GoLightBulb} from "react-icons/go";
-import {MdOutlineArticle} from "react-icons/md";
-import {IoPersonOutline} from "react-icons/io5";
+import useTranslate from "./useTranslate"; // Thêm import cho hook useTranslate
+import { useRouter } from "next/router";
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { BiMoon, BiSun } from "react-icons/bi";
+import { GoLightBulb } from "react-icons/go"; // Thêm import cho biểu tượng ngôn ngữ
+import { IoPersonOutline } from "react-icons/io5";
+import { useTranslation } from 'next-i18next'
 
 const imgLink = "https://avatars.githubusercontent.com/u/89400593"
 
 const navigation = [
-    {name: 'Article', href: '/', logo: '📜', current: false},
-    {name: 'Project', href: '/project', logo: '🚩', current: false},
+    { name: 'Article', href: '/', logo: '📜', current: false },
+    { name: 'Project', href: '/project', logo: '🚩', current: false },
     // {name: 'Saved', href: '/article', logo: '📰', current: false},
     // {name: 'Video', href: '/video', logo: '🎞️', current: false},
-    {name: 'About Me', href: '/me', logo: '🙋', current: false},
-    { name: 'Certificate', href: '/certificate', logo: '🎓', current: false},
+    { name: 'About Me', href: '/me', logo: '🙋', current: false },
+    { name: 'Certificate', href: '/certificate', logo: '🎓', current: false },
 ]
 
 function DarkModeButton(isDarkMode: any, setDarkMode: any) {
@@ -34,20 +34,42 @@ function DarkModeButton(isDarkMode: any, setDarkMode: any) {
                     aria-hidden="true"
                     className={`${isDarkMode ? 'translate-x-5' : 'translate-x-0'}
                                                 pointer-events-none flex justify-center items-center inline-block h-[22px] w-[22px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}>
-                    {isDarkMode ? <BiMoon className={"text-blue-400"}/> : <BiSun className={"text-red-500"}/>}
+                    {isDarkMode ? <BiMoon className={"text-blue-400"} /> : <BiSun className={"text-red-500"} />}
                 </span>
             </Switch>
         </div>
     )
 }
 
+function LanguageButton(isVietnamese: any, toggleLanguage: any) {
+    return (
+        <div className="grid place-items-center text-gray-500">
+            <Switch
+                checked={isVietnamese}
+                onChange={toggleLanguage}
+                className={`${isVietnamese ? 'bg-blue-600' : 'bg-gray-200'}
+                relative inline-flex h-[26px] w-[46px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+            >
+                <span className="sr-only">Use setting</span>
+                <span
+                    aria-hidden="true"
+                    className={`${isVietnamese ? 'translate-x-5' : 'translate-x-0'}
+                                                pointer-events-none flex justify-center items-center inline-block h-[22px] w-[22px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                >
+                    {isVietnamese ? 'VI' : 'EN'}
+                </span>
+            </Switch>
+        </div>
+    )
+}
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
-
 const Header = () => {
+    const { t } = useTranslation('common');
     const [isDarkMode, setDarkMode] = useDarkMode();
+    const [isVietnamese, toggleLanguage] = useTranslate(); 
     const router = useRouter();
     return (
         <Disclosure as="nav" className="z-10 bg-white border-b border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-600">
@@ -92,7 +114,10 @@ const Header = () => {
                                 </div>
                             </div>
                             <div className="flex items-center">
-                                {DarkModeButton(isDarkMode, setDarkMode)}
+                                <div className="mx-2">
+                                    {DarkModeButton(isDarkMode, setDarkMode)}
+                                </div>
+                                <div>{LanguageButton(isVietnamese, toggleLanguage)}</div>
                                 <Link href={"/me"} className="relative ml-3">
                                     <img src={imgLink} alt="avatar" className="w-9 h-9 rounded-full" />
                                 </Link>
@@ -119,8 +144,7 @@ const Header = () => {
                 </nav>
             )}
         </Disclosure>
-
-    )
-}
+    );
+};
 
 export default Header;

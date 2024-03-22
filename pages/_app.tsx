@@ -5,10 +5,11 @@ import Head from "next/head";
 import Header from '../components/header';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Footer from "../components/footer";
+import { appWithTranslation } from "next-i18next";
 
 const queryClient = new QueryClient();
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -23,7 +24,6 @@ export default function App({ Component, pageProps }: AppProps) {
       window.removeEventListener('resize', handleResize); 
     };
   }, []);
-
   return (
     <div>
       <Head>
@@ -49,3 +49,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </div>
   )
 }
+
+export default appWithTranslation(App);
