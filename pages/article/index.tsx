@@ -6,7 +6,6 @@ import Loading from "../../components/loading";
 import ErrorPage from "../../components/error";
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import {useRouter} from "next/router";
-import {useInfiniteQuery} from "@tanstack/react-query";
 
 // export const getStaticProps = async () => {
 //     const res = await fetch("https://api.raindrop.io/rest/v1/raindrops/30340862",

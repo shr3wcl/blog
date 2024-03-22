@@ -2,7 +2,6 @@ import Link from "next/link";
 import {BiTime} from "react-icons/bi";
 import dayjs from "dayjs";
 import {AiOutlineYoutube} from "react-icons/ai";
-import Image from "next/image";
 
 const ListVideo = ({videoList}: any) => {
     return (

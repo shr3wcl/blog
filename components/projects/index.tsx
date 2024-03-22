@@ -16,7 +16,6 @@ const ProjectList = ({projects}: any) => {
                 <div className={"flex items-center"}>
                   <span className={"mr-1"}><BiBookBookmark className="text-blue-500 dark:text-blue-400" /></span>
                   <span className={"dark:text-blue-400 text-blue-500 font-semibold"}>{each.name}</span>
-                  {/* <p className={"border border-gray-400 rounded-xl text-blue-400 px-1 dark:border-[#768390] ml-1 text-sm h-fit"}>Public</p> */}
                 </div>
                 <span className={"text-sm text-gray-500 flex items-center"}>
                   <span className={"mr-1"}><AiOutlineStar /></span>

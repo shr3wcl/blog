@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-import { Accordion, AccordionItem } from 'react-accessible-accordion';
 import dayjs from "dayjs";
 import Style from "./style";
 

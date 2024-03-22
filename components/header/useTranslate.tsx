@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 
 const useTranslate = () => {
-    const [isVietnamese, setVietnamese] = useState<String>();
+    const [isVietnamese, setVietnamese] = useState<Boolean>();
     const t = useTranslation();
 
     const changeLanguage = (lng: string) => {
@@ -12,38 +12,27 @@ const useTranslate = () => {
     const checkInitialLanguagePreference = () => {
         const storedLanguage = localStorage.getItem("language");
         if (storedLanguage) {
-            return storedLanguage === "vi" ? "vi" : "en"; 
+            return storedLanguage === "vi"; 
         } else {
             if (typeof window !== "undefined") {
                 const userLanguage = window.navigator.language;
-                return userLanguage.startsWith("vi") ? "vi" : "en"; 
+                return userLanguage.startsWith("vi"); 
             }
-            return "vi";
+            return true;
         }
     };
 
     useEffect(() => {
-        const initialLanguage = checkInitialLanguagePreference();
+        const initialLanguage = checkInitialLanguagePreference() ;
         setVietnamese(initialLanguage);
     }, []);
 
-    const toggleLanguage = (isVietnamese: String) => {
+    const toggleLanguage = (isVietnamese: Boolean) => {
         localStorage.setItem("language", isVietnamese ? "vi" : "en");
         setVietnamese(isVietnamese);
         changeLanguage(isVietnamese ? 'vi' : 'en');
-        // Redirect to the to /vi/... or /en/... based on the current
-        window.location.href = `/${isVietnamese ? 'vi' : 'en'}/${window.location.pathname}`;
+        window.location.href = window.location.href.replace(isVietnamese ? "/en" : "/vi", isVietnamese ? "/vi" : "/en");
     }
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            if (isVietnamese) {
-                document.documentElement.classList.add("vi");
-            } else {
-                document.documentElement.classList.remove("vi");
-            }
-        }
-    }, [isVietnamese])
 
     return [isVietnamese, toggleLanguage];
 }
