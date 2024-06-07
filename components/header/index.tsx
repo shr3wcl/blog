@@ -19,6 +19,7 @@ const navigation = [
     // {name: 'Video', href: '/video', logo: '🎞️', current: false},
     { name: 'About Me', href: '/me', logo: '🙋', current: false },
     { name: 'Certificate', href: '/certificate', logo: '🎓', current: false },
+    { name: 'Love', href: '/love/emiu', logo: '💖', current: false },
 ]
 
 function DarkModeButton(isDarkMode: any, setDarkMode: any) {
